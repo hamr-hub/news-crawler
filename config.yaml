@@ -1,0 +1,43 @@
+# Global configuration for news crawler
+
+crawler:
+  # Crawler settings
+  interval_minutes: 30  # Crawl interval
+  max_concurrent: 5     # Max concurrent crawlers
+  timeout_seconds: 30   # Request timeout
+  
+  # Search engine settings
+  search_engines:
+    - google
+    - baidu
+    - yandex
+    
+  # Rate limiting
+  rate_limit:
+    requests_per_minute: 20
+    delay_seconds: 3
+    
+  # Storage settings
+  storage:
+    data_dir: "data"
+    sites_dir: "data/sites"
+    news_dir: "data/news"
+    log_dir: "logs"
+    
+  # AI repair settings
+  ai_repair:
+    enabled: true
+    max_retries: 3
+    model: "gpt-4"
+    
+  # GitHub settings
+  github:
+    enabled: false
+    repo: ""
+    token: ""
+    
+  # Deduplication settings
+  deduplication:
+    similarity_threshold: 0.85
+    compare_title: true
+    compare_content: true
