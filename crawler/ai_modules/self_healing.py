@@ -1,7 +1,7 @@
 import json
 import logging
 from openai import OpenAI
-from crawler.rules_manager import update_rules
+from crawler.crawler.rules_manager import update_rules
 
 # 初始化 OpenAI 客户端 (需要环境变量 OPENAI_API_KEY)
 client = OpenAI()
