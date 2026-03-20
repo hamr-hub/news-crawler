@@ -1,0 +1,344 @@
+{
+  "overallStatus": "PASS_WITH_WARNING",
+  "timestamp": "2026-03-20T07:18:24.838Z",
+  "results": {
+    "p0Checks": [
+      {
+        "name": "Node.js",
+        "status": "PASS",
+        "installed": true,
+        "version": "24.12.0",
+        "meetsRequirement": true,
+        "severity": "P0",
+        "notes": "推荐版本"
+      },
+      {
+        "name": "Git",
+        "status": "PASS",
+        "installed": true,
+        "version": "2.50.1",
+        "inRepo": true,
+        "severity": "P0",
+        "notes": ""
+      },
+      {
+        "name": "Package Manager",
+        "status": "PASS",
+        "detected": "pnpm",
+        "projectManager": null,
+        "version": "10.32.1",
+        "availableManagers": [
+          {
+            "name": "pnpm",
+            "version": "10.32.1",
+            "installed": true
+          },
+          {
+            "name": "yarn",
+            "version": "1.22.22",
+            "installed": true
+          },
+          {
+            "name": "npm",
+            "version": "11.6.2",
+            "installed": true
+          }
+        ],
+        "severity": "P0",
+        "notes": "检测到 pnpm（未找到 lock 文件）"
+      },
+      {
+        "name": "ai-flow",
+        "status": "PASS_WITH_WARNING",
+        "localVersion": null,
+        "globalVersion": "0.3.18",
+        "activeVersion": "0.3.18",
+        "installedAt": null,
+        "source": "global",
+        "localPath": null,
+        "globalPath": "/Users/hyx/.codeflicker/skills/ai-flow/skill.json",
+        "severity": "P0",
+        "notes": "⚠️ 使用全局版本 0.3.18（建议项目中安装本地版本）"
+      },
+      {
+        "name": "AI Flow Config",
+        "status": "PASS",
+        "configFile": {
+          "exists": true,
+          "generated": false,
+          "updated": true,
+          "version": "2.5.0",
+          "changes": [
+            {
+              "type": "added",
+              "path": "mode"
+            },
+            {
+              "type": "added",
+              "path": "execution"
+            },
+            {
+              "type": "added",
+              "path": "stages"
+            },
+            {
+              "type": "added",
+              "path": "guardian"
+            },
+            {
+              "type": "added",
+              "path": "performance"
+            },
+            {
+              "type": "added",
+              "path": "output"
+            },
+            {
+              "type": "added",
+              "path": "experimental"
+            }
+          ]
+        },
+        "snippetsDir": {
+          "exists": true,
+          "generated": false
+        },
+        "platformJsonConfig": {
+          "exists": true,
+          "valid": true,
+          "needsUpdate": true,
+          "changes": [
+            {
+              "type": "added",
+              "field": "documentPaths"
+            },
+            {
+              "type": "missing_commands",
+              "commands": [
+                "dev",
+                "build"
+              ]
+            }
+          ],
+          "errors": [
+            {
+              "type": "MISSING_FIELDS",
+              "message": "缺少必填字段: name, directories.rules, directories.docs, extensions.figma",
+              "suggestion": "将自动补充缺失字段"
+            }
+          ]
+        },
+        "missingFiles": [],
+        "generatedFiles": [],
+        "updatedFiles": [
+          ".ai-flow.config.js"
+        ],
+        "severity": "P0",
+        "notes": "✅ 更新: .ai-flow.config.js | 变更: [object Object], [object Object], [object Object] 等7项",
+        "details": {
+          "configFile": {
+            "exists": true,
+            "generated": false,
+            "updated": true,
+            "version": "2.5.0",
+            "changes": [
+              {
+                "type": "added",
+                "path": "mode"
+              },
+              {
+                "type": "added",
+                "path": "execution"
+              },
+              {
+                "type": "added",
+                "path": "stages"
+              },
+              {
+                "type": "added",
+                "path": "guardian"
+              },
+              {
+                "type": "added",
+                "path": "performance"
+              },
+              {
+                "type": "added",
+                "path": "output"
+              },
+              {
+                "type": "added",
+                "path": "experimental"
+              }
+            ]
+          },
+          "platformJsonConfig": {
+            "exists": true,
+            "valid": true,
+            "needsUpdate": true,
+            "changes": [
+              {
+                "type": "added",
+                "field": "documentPaths"
+              },
+              {
+                "type": "missing_commands",
+                "commands": [
+                  "dev",
+                  "build"
+                ]
+              }
+            ],
+            "errors": [
+              {
+                "type": "MISSING_FIELDS",
+                "message": "缺少必填字段: name, directories.rules, directories.docs, extensions.figma",
+                "suggestion": "将自动补充缺失字段"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Version Dependencies",
+        "status": "PASS",
+        "version": "0.3.18",
+        "requiredFiles": [],
+        "missingFiles": [],
+        "existingFiles": [],
+        "severity": "P0",
+        "notes": "ℹ️ 版本 0.3.18 无特定文件依赖"
+      }
+    ],
+    "p1Checks": [
+      {
+        "name": "Test Environment",
+        "status": "PASS_WITH_WARNING",
+        "testFramework": null,
+        "testEnvironment": null,
+        "configFile": null,
+        "needsDomApi": false,
+        "isConfigured": false,
+        "severity": "P1",
+        "notes": "未检测到测试框架（如需要，建议安装 vitest/jest）",
+        "recommendations": []
+      },
+      {
+        "name": "Testing Libraries",
+        "status": "PASS_WITH_WARNING",
+        "severity": "P1",
+        "notes": "未找到 package.json，无法检查测试库",
+        "issues": []
+      },
+      {
+        "name": "Android Environment",
+        "status": "SKIPPED",
+        "severity": "P1",
+        "notes": "非 Android 项目，跳过检查",
+        "details": {}
+      },
+      {
+        "name": "iOS Environment",
+        "status": "SKIPPED",
+        "message": "非 iOS 项目，跳过检查",
+        "items": []
+      },
+      {
+        "name": "Backend Environment",
+        "status": "PASS",
+        "severity": "P1",
+        "notes": "✅ 已安装: Python 3.13.3, Java 11.0.25, Docker",
+        "details": {
+          "python": {
+            "installed": true,
+            "version": "3.13.3",
+            "meetsMinimum": true
+          },
+          "java": {
+            "installed": true,
+            "version": "11.0.25",
+            "meetsMinimum": true
+          },
+          "docker": {
+            "installed": true,
+            "version": "Docker version 29.1.3, build f52814d454"
+          },
+          "mysql": {
+            "installed": false,
+            "version": null
+          },
+          "redis": {
+            "installed": false,
+            "version": null
+          }
+        }
+      },
+      {
+        "name": "Figma Tools",
+        "status": "PASS",
+        "installed": true,
+        "toolName": "flickcli",
+        "toolVersion": "0.4.2",
+        "figmaEnabled": true,
+        "configPath": ".codeflicker/config.json",
+        "configMethod": null,
+        "autoFixed": true,
+        "autoFixAttempted": true,
+        "severity": "P1",
+        "notes": "✅ flickcli Figma Tools 已自动启用（通过 .codeflicker/config.json）",
+        "recommendation": null
+      },
+      {
+        "name": "Figma MCP",
+        "status": "PASS",
+        "installed": true,
+        "toolsFound": [
+          "codeflicker-figma",
+          "kwaipilot-figma"
+        ],
+        "severity": "P1",
+        "notes": "已安装 Figma MCP，可作为 Figma Tools 的降级方案"
+      },
+      {
+        "name": "灵创 MCP",
+        "status": "PASS_WITH_WARNING",
+        "installed": false,
+        "toolsFound": [],
+        "severity": "P1",
+        "notes": "未安装，建议安装作为 Figma MCP 的降级方案"
+      }
+    ],
+    "p2Checks": [
+      {
+        "name": "agent-browser",
+        "status": "PASS",
+        "installed": false,
+        "version": null,
+        "severity": "P2",
+        "notes": "可选工具，用于 Web 应用自动验收"
+      },
+      {
+        "name": "Playwright MCP",
+        "status": "PASS",
+        "installed": true,
+        "toolsFound": [
+          "playwright"
+        ],
+        "severity": "P2",
+        "notes": "可选工具，用于自动化 E2E 测试"
+      }
+    ],
+    "prototypeGeneratorConfig": null
+  },
+  "blockingIssues": [],
+  "warnings": [
+    "⚠️ 使用全局版本 0.3.18（建议项目中安装本地版本）",
+    "未检测到测试框架（如需要，建议安装 vitest/jest）",
+    "未找到 package.json，无法检查测试库",
+    "未安装，建议安装作为 Figma MCP 的降级方案"
+  ],
+  "recommendations": [
+    "🚀 可以继续使用 AI Flow"
+  ],
+  "prototypeGeneratorConfig": null
+}

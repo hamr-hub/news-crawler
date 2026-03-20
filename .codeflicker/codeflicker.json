@@ -1,16 +1,48 @@
 {
+  "name": "news-crawler",
+  "version": "1.0.0",
+  "description": "news-crawler AI Flow 项目配置",
   "project": {
     "type": "python",
+    "language": "python",
     "platform": "codeflicker"
   },
   "directories": {
+    "rules": ".codeflicker/rules.md",
+    "skills": ".codeflicker/skills",
     "snippets": ".codeflicker/snippets",
-    "agent": "docs/agent",
+    "docs": "docs",
     "tasks": "docs/tasks",
-    "research": "docs/research"
+    "research": "docs/research",
+    "agent": "docs/agent"
   },
+  "extensions": {
+    "figma": true
+  },
+  "css": {
+    "framework": "Unknown",
+    "preprocessor": null,
+    "fileExtension": "css",
+    "modules": false
+  },
+  "build": {
+    "tools": [],
+    "packageManager": "npm"
+  },
+  "test": {
+    "frameworks": [
+      "unittest"
+    ]
+  },
+  "features": [
+    "redis",
+    "pydantic"
+  ],
   "commands": {
-    "test": "pytest",
-    "lint": "flake8 ."
+    "dev": null,
+    "build": null,
+    "test": "pytest --tb=short -q",
+    "lint": "flake8",
+    "typecheck": null
   }
 }
