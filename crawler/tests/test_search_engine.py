@@ -5,43 +5,40 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-
 def test_search_engine_import():
     from crawler.services.search_engine import SearchEngine
     assert SearchEngine is not None
-
 
 def test_search_engine_init():
     from crawler.services.search_engine import SearchEngine
     engine = SearchEngine()
     assert engine is not None
 
-
-@patch('crawler.services.search_engine.requests.get')
-def test_google_search(mock_get):
+@patch('crawler.services.search_engine.time.sleep')
+@patch('crawler.services.search_engine.requests.Session.get')
+def test_google_search(mock_get, mock_sleep):
     from crawler.services.search_engine import SearchEngine
     mock_response = Mock()
-    mock_response.text = '<html><a href="https://example.com">News</a></html>'
+    mock_response.text = '<html><div class=g><a href=http://example.com><h3>Example News</h3></a><div class=VwiC3b>News description</div></div></html>'
     mock_response.status_code = 200
     mock_get.return_value = mock_response
     
     engine = SearchEngine()
-    results = engine.search("news site:news", engine="google")
+    results = engine.search('news site:news', engine='google', max_results=2)
     assert isinstance(results, list)
 
-
-@patch('crawler.services.search_engine.requests.get')
-def test_baidu_search(mock_get):
+@patch('crawler.services.search_engine.time.sleep')
+@patch('crawler.services.search_engine.requests.Session.get')
+def test_baidu_search(mock_get, mock_sleep):
     from crawler.services.search_engine import SearchEngine
     mock_response = Mock()
-    mock_response.text = '<html><a href="https://example.com">News</a></html>'
+    mock_response.text = '<html><div class=result><a href=http://example.com><h3>Example News</h3></a><div class=c-abstract>News description</div></div></html>'
     mock_response.status_code = 200
     mock_get.return_value = mock_response
     
     engine = SearchEngine()
-    results = engine.search("新闻网站", engine="baidu")
+    results = engine.search('新闻网站', engine='baidu', max_results=2)
     assert isinstance(results, list)
-
 
 def test_search_result_structure():
     from crawler.services.search_engine import SearchEngine
