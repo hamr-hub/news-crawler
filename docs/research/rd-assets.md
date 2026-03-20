@@ -1,15 +1,11 @@
-# 研发资产沉淀报告
-
-## 1. 项目概况
-- **项目类型**: Python 爬虫项目
-- **核心框架**: Scrapy, Playwright
-- **AI 能力**: OpenAI (站点分类、内容聚合、选择器自愈)
-
-## 2. 核心架构
-- `news_crawler/crawler/spiders/`: 爬虫实现 (发现爬虫, 新闻爬虫)
-- `news_crawler/ai_modules/`: AI 集成模块 (site_classifier, news_aggregator, self_healing)
-- `news_crawler/crawler/`: Scrapy 核心配置 (pipelines, items, settings, rules_manager)
-
-## 3. 代码片段建议
-- **Scrapy 爬虫模板**: `news_crawler/crawler/spiders/`
-- **AI 模块调用**: `news_crawler/ai_modules/`
+# 研发资产盘点
+## 核心业务资产
+- `crawler/start_crawl.py` (主入口)
+- `crawler/crawler/spiders/news_spider.py` (核心爬虫)
+- `crawler/ai_modules/self_healing.py` (AI自愈模块)
+- `crawler/services/search_engine.py` (搜索引擎)
+- `crawler/services/site_classifier.py` (站点分类)
+## 配置资产
+- `crawler/scrapy.cfg`
+- `config.yaml`
+- `.ai-flow.config.js`
