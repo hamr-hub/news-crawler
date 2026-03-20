@@ -1,0 +1,6 @@
+rd_assets:
+  project_type: python_crawler
+  core_frameworks:
+    - scrapy
+    - playwright
+    - openai

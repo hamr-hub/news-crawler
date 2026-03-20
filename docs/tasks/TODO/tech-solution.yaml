@@ -1,0 +1,189 @@
+meta:
+  title: "新闻爬虫系统技术方案"
+  date: "2026-03-20"
+  platform: "python"
+  owners: []
+  links:
+    prd: ""
+    figma: ""
+
+platform_specific:
+  python:
+    architecture: "libs-worker-separated"
+    new_files:
+      worker: "crawler/workers/news_spider.py"
+      starter: "crawler/start_crawl.py"
+      service: "crawler/services/news_service.py"
+    test_command: "pytest crawler/tests/ -v"
+    lint_command: "git diff --name-only | grep '.py$' | xargs flake8 --max-line-length=120"
+
+file_changes:
+  - path: "requirements.txt"
+    change: "add"
+    summary: "添加项目依赖（scrapy, playwright, openai 等）"
+    platform: "python"
+    risk: "low"
+    test_points: []
+
+  - path: "crawler/config/sites.yaml"
+    change: "add"
+    summary: "新闻网站配置文件，包含站点URL、国家、类型"
+    platform: "python"
+    risk: "low"
+    test_points: []
+
+  - path: "crawler/services/search_engine.py"
+    change: "add"
+    summary: "搜索引擎模块，通过 Google/Baidu/Yandex 发现新闻网站"
+    platform: "python"
+    risk: "medium"
+    test_points:
+      - "测试各搜索引擎查询结果"
+      - "测试反爬策略绕过"
+
+  - path: "crawler/services/site_classifier.py"
+    change: "add"
+    summary: "网站分类模块，根据内容和结构标定国家、新闻类型"
+    platform: "python"
+    risk: "medium"
+    test_points:
+      - "测试分类准确性"
+      - "测试新站点分类"
+
+  - path: "crawler/workers/news_spider.py"
+    change: "add"
+    summary: "新闻爬取 Worker，使用 Playwright 处理动态内容"
+    platform: "python"
+    risk: "high"
+    test_points:
+      - "测试各新闻网站爬取"
+      - "测试反爬检测"
+      - "测试动态内容加载"
+
+  - path: "crawler/services/deduplicator.py"
+    change: "add"
+    summary: "新闻去重服务，基于内容相似度去重"
+    platform: "python"
+    risk: "medium"
+    test_points:
+      - "测试去重准确性"
+      - "测试相似度阈值"
+
+  - path: "crawler/services/ai_repair.py"
+    change: "add"
+    summary: "AI 修复模块，检测爬取错误并自动修复"
+    platform: "python"
+    risk: "high"
+    test_points:
+      - "测试错误识别准确性"
+      - "测试代码修复能力"
+
+  - path: "crawler/services/github_issue_handler.py"
+    change: "add"
+    summary: "GitHub Issue 处理模块，自动处理用户提交的 Issue"
+    platform: "python"
+    risk: "medium"
+    test_points:
+      - "测试 Issue 解析"
+      - "测试自动修复流程"
+
+  - path: "crawler/services/storage.py"
+    change: "add"
+    summary: "JSON 存储服务，将爬取数据保存为 JSON 文件"
+    platform: "python"
+    risk: "low"
+    test_points:
+      - "测试 JSON 序列化"
+      - "测试文件写入"
+
+  - path: "crawler/start_crawl.py"
+    change: "add"
+    summary: "爬虫启动入口，调度各模块完成任务"
+    platform: "python"
+    risk: "medium"
+    test_points:
+      - "测试调度流程"
+      - "测试循环爬取"
+
+  - path: "crawler/tests/"
+    change: "add"
+    summary: "测试目录"
+    platform: "python"
+    risk: "low"
+    test_points: []
+
+  - path: "data/sites/"
+    change: "add"
+    summary: "已发现站点数据存储目录"
+    platform: "python"
+    risk: "low"
+    test_points: []
+
+  - path: "data/news/"
+    change: "add"
+    summary: "爬取新闻数据存储目录"
+    platform: "python"
+    risk: "low"
+    test_points: []
+
+  - path: "logs/"
+    change: "add"
+    summary: "日志存储目录"
+    platform: "python"
+    risk: "low"
+    test_points: []
+
+  - path: "config.yaml"
+    change: "add"
+    summary: "全局配置文件"
+    platform: "python"
+    risk: "low"
+    test_points: []
+
+api: []
+
+database_changes: []
+
+tracking: []
+
+flags: []
+
+validation:
+  acceptance:
+    - id: "AC1"
+      description: "能够通过搜索引擎发现主流新闻网站"
+      verification: "运行搜索脚本，输出至少 50 个新闻网站"
+    - id: "AC2"
+      description: "新闻网站按国家和类型归类"
+      verification: "输出包含 country 和 category 字段的站点列表"
+    - id: "AC3"
+      description: "循环爬取新闻内容"
+      verification: "定期执行爬虫，输出 JSON 格式新闻数据"
+    - id: "AC4"
+      description: "相同内容新闻去重汇总"
+      verification: "同一新闻多来源只保留一条"
+    - id: "AC5"
+      description: "AI 自动修复爬取错误"
+      verification: "模拟爬取错误，AI 识别并修复爬虫代码"
+    - id: "AC6"
+      description: "GitHub Issue 自动修复"
+      verification: "创建测试 Issue，系统自动识别并修复"
+    - id: "AC7"
+      description: "数据以 JSON 格式保存"
+      verification: "检查输出目录存在 JSON 文件"
+
+  rollback: []
+
+  monitoring:
+    - metric: "爬取成功率"
+      description: "爬取成功比例"
+    - metric: "错误率"
+      description: "爬取错误比例"
+    - metric: "去重率"
+      description: "重复新闻比例"
+
+open_questions:
+  - question: "搜索引擎访问受限时的兜底策略"
+    priority: "medium"
+  - question: "爬取速率限制配置"
+    priority: "low"

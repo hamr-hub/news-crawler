@@ -1,0 +1,16 @@
+{
+  "project": {
+    "type": "python",
+    "platform": "codeflicker"
+  },
+  "directories": {
+    "snippets": ".codeflicker/snippets",
+    "agent": "docs/agent",
+    "tasks": "docs/tasks",
+    "research": "docs/research"
+  },
+  "commands": {
+    "test": "pytest",
+    "lint": "flake8 ."
+  }
+}

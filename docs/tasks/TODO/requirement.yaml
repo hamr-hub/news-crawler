@@ -1,0 +1,106 @@
+gate:
+  verdict: "PASS"
+  mode: "standard"
+  figma_links: []
+  figma_status: "not_found"
+  p0_missing: []
+  p1_missing:
+    - dimension: "monitoring"
+      description: "建议添加监控指标（爬取成功率、错误率等）"
+    - dimension: "fallback"
+      description: "搜索引擎访问受限时的兜底策略"
+  open_questions: []
+  risks: []
+  evidence:
+    sources:
+      - "user_input"
+  suggestions:
+    - "考虑添加爬取速率限制以避免被封禁"
+    - "建议添加日志持久化以便问题排查"
+  recommended_template: "general"
+
+requirement:
+  business_goal:
+    target_users: "新闻聚合需求的用户"
+    problems:
+      - "新闻来源分散，需要手动收集"
+      - "无法及时获取最新新闻"
+      - "重复内容过多"
+      - "爬虫报错需要人工介入修复"
+    success_criteria:
+      - "自动发现并归类新闻网站"
+      - "持续爬取最新新闻并去重"
+      - "AI 自动修复爬虫错误"
+      - "GitHub 发布后自动处理 Issue"
+
+  scope:
+    do:
+      - "通过 Google/Baidu/Yandex 等搜索引擎搜索新闻网站"
+      - "对新闻网站自动归类（国家、新闻类型）"
+      - "循环爬取各新闻网站最新内容"
+      - "相同内容新闻汇总去重"
+      - "爬取出错时 AI 校对并修复"
+      - "发布到 GitHub 并自动处理 Issue"
+    dont_do:
+      - "爬取需要登录的付费新闻"
+      - "存储原始网页内容（只存结构化数据）"
+
+  interactions:
+    - entry: "搜索引擎查询新闻网站"
+      path: "搜索 → 发现网站 → 归类标注 → 添加到爬取队列"
+      key_states:
+        - "待爬取网站队列"
+        - "爬取中"
+        - "爬取完成"
+        - "需要修复"
+
+  data_interfaces:
+    storage: "JSON 文件"
+    schema:
+      - field: "id"
+        type: "string"
+        description: "新闻唯一标识"
+      - field: "title"
+        type: "string"
+        description: "新闻标题"
+      - field: "content"
+        type: "string"
+        description: "新闻内容"
+      - field: "source"
+        type: "string"
+        description: "新闻来源网站"
+      - field: "country"
+        type: "string"
+        description: "来源国家"
+      - field: "category"
+        type: "string"
+        description: "新闻分类"
+      - field: "published_at"
+        type: "datetime"
+        description: "发布时间"
+      - field: "crawled_at"
+        type: "datetime"
+        description: "爬取时间"
+
+  acceptance_criteria:
+    - id: "AC1"
+      description: "能够通过搜索引擎发现主流新闻网站"
+      verification: "运行搜索脚本，输出至少 50 个新闻网站"
+    - id: "AC2"
+      description: "新闻网站按国家和类型归类"
+      verification: "输出包含 country 和 category 字段的站点列表"
+    - id: "AC3"
+      description: "循环爬取新闻内容"
+      verification: "定期执行爬虫，输出 JSON 格式新闻数据"
+    - id: "AC4"
+      description: "相同内容新闻去重汇总"
+      verification: "同一新闻多来源只保留一条"
+    - id: "AC5"
+      description: "AI 自动修复爬取错误"
+      verification: "模拟爬取错误，AI 识别并修复爬虫代码"
+    - id: "AC6"
+      description: "GitHub Issue 自动修复"
+      verification: "创建测试 Issue，系统自动识别并修复"
+    - id: "AC7"
+      description: "数据以 JSON 格式保存"
+      verification: "检查输出目录存在 JSON 文件"

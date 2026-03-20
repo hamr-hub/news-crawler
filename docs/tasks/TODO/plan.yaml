@@ -1,0 +1,241 @@
+plan:
+  meta:
+    source_tech_doc: "docs/tasks/TODO/tech-solution.yaml"
+    scope: "P0"
+    test_coverage_target: 80
+    min_tests_per_feature: 3
+    platform: "python"
+
+  tasks:
+    - id: "T0-1"
+      priority: "P0"
+      type: "test"
+      title: "编写项目基础结构测试"
+      target: "基础配置"
+      test_type: "pure"
+      file: "crawler/tests/test_config.py"
+      given: "给定项目配置文件"
+      when: "当加载配置文件时"
+      then:
+        - "应该正确解析 YAML 配置"
+        - "应该包含必需的字段"
+      depends_on: []
+
+    - id: "T0-2"
+      priority: "P0"
+      type: "test"
+      title: "编写搜索引擎模块测试"
+      target: "search_engine"
+      test_type: "pure"
+      file: "crawler/tests/test_search_engine.py"
+      given: "给定搜索引擎关键词"
+      when: "当执行搜索时"
+      then:
+        - "应该返回搜索结果列表"
+        - "应该包含网站 URL"
+      depends_on: []
+
+    - id: "T0-3"
+      priority: "P0"
+      type: "test"
+      title: "编写网站分类模块测试"
+      target: "site_classifier"
+      test_type: "pure"
+      file: "crawler/tests/test_site_classifier.py"
+      given: "给定网站 URL"
+      when: "当分类网站时"
+      then:
+        - "应该返回国家分类"
+        - "应该返回新闻类型分类"
+      depends_on: []
+
+    - id: "T0-4"
+      priority: "P0"
+      type: "test"
+      title: "编写去重服务测试"
+      target: "deduplicator"
+      test_type: "pure"
+      file: "crawler/tests/test_deduplicator.py"
+      given: "给定新闻列表"
+      when: "当执行去重时"
+      then:
+        - "应该去除重复新闻"
+        - "应该保留最新内容"
+      depends_on: []
+
+    - id: "T0-5"
+      priority: "P0"
+      type: "test"
+      title: "编写存储服务测试"
+      target: "storage"
+      test_type: "pure"
+      file: "crawler/tests/test_storage.py"
+      given: "给定新闻数据"
+      when: "当保存到 JSON 时"
+      then:
+        - "应该正确序列化"
+        - "应该写入文件"
+      depends_on: []
+
+    - id: "P0-1"
+      priority: "P0"
+      type: "code"
+      title: "创建项目基础配置和目录结构"
+      files:
+        - "requirements.txt"
+        - "config.yaml"
+        - "crawler/__init__.py"
+        - "crawler/config/__init__.py"
+        - "crawler/services/__init__.py"
+        - "crawler/workers/__init__.py"
+        - "crawler/tests/__init__.py"
+      depends_on: []
+      definition_of_done:
+        - "创建 requirements.txt 包含所有依赖"
+        - "创建 config.yaml 配置文件"
+        - "创建目录结构"
+
+    - id: "P0-2"
+      priority: "P0"
+      type: "code"
+      title: "实现搜索引擎模块"
+      files:
+        - "crawler/services/search_engine.py"
+      depends_on: ["T0-2"]
+      definition_of_done:
+        - "实现 Google 搜索功能"
+        - "实现 Baidu 搜索功能"
+        - "实现 Yandex 搜索功能"
+        - "搜索结果正确解析"
+
+    - id: "P0-3"
+      priority: "P0"
+      type: "code"
+      title: "实现网站分类模块"
+      files:
+        - "crawler/services/site_classifier.py"
+        - "crawler/config/sites.yaml"
+      depends_on: ["T0-3"]
+      definition_of_done:
+        - "实现国家分类逻辑"
+        - "实现新闻类型分类"
+        - "配置文件包含站点信息"
+
+    - id: "P0-4"
+      priority: "P0"
+      type: "code"
+      title: "实现新闻爬取 Worker"
+      files:
+        - "crawler/workers/news_spider.py"
+      depends_on: ["P0-3"]
+      definition_of_done:
+        - "使用 Playwright 爬取动态内容"
+        - "支持多网站爬取"
+        - "提取新闻标题、内容、时间"
+
+    - id: "P0-5"
+      priority: "P0"
+      type: "code"
+      title: "实现去重服务"
+      files:
+        - "crawler/services/deduplicator.py"
+      depends_on: ["T0-4"]
+      definition_of_done:
+        - "基于内容相似度去重"
+        - "支持阈值配置"
+        - "保留最新内容"
+
+    - id: "P0-6"
+      priority: "P0"
+      type: "code"
+      title: "实现 JSON 存储服务"
+      files:
+        - "crawler/services/storage.py"
+      depends_on: ["T0-5", "P0-4"]
+      definition_of_done:
+        - "JSON 格式保存数据"
+        - "按日期组织文件"
+        - "支持增量写入"
+
+    - id: "P0-7"
+      priority: "P0"
+      type: "code"
+      title: "实现爬虫启动入口"
+      files:
+        - "crawler/start_crawl.py"
+      depends_on: ["P0-6"]
+      definition_of_done:
+        - "调度各模块完成任务"
+        - "支持循环爬取"
+        - "支持定时执行"
+
+    - id: "T1-1"
+      priority: "P1"
+      type: "test"
+      title: "编写 AI 修复模块测试"
+      target: "ai_repair"
+      test_type: "pure"
+      file: "crawler/tests/test_ai_repair.py"
+      given: "给定错误信息"
+      when: "当 AI 修复时"
+      then:
+        - "应该识别错误类型"
+        - "应该生成修复建议"
+      depends_on: ["P0-4"]
+
+    - id: "P1-1"
+      priority: "P1"
+      type: "code"
+      title: "实现 AI 修复模块"
+      files:
+        - "crawler/services/ai_repair.py"
+      depends_on: ["T1-1"]
+      definition_of_done:
+        - "检测爬取错误"
+        - "调用 AI 分析错误"
+        - "生成修复代码"
+
+    - id: "T1-2"
+      priority: "P1"
+      type: "test"
+      title: "编写 GitHub Issue 处理模块测试"
+      target: "github_issue_handler"
+      test_type: "pure"
+      file: "crawler/tests/test_github_issue_handler.py"
+      given: "给定 Issue 内容"
+      when: "当处理 Issue 时"
+      then:
+        - "应该正确解析 Issue"
+        - "应该触发修复流程"
+      depends_on: ["P1-1"]
+
+    - id: "P1-2"
+      priority: "P1"
+      type: "code"
+      title: "实现 GitHub Issue 处理模块"
+      files:
+        - "crawler/services/github_issue_handler.py"
+      depends_on: ["T1-2"]
+      definition_of_done:
+        - "监听 GitHub Issue"
+        - "自动识别问题类型"
+        - "触发自动修复"
+
+  commands:
+    test: "pytest crawler/tests/ -v"
+    lint: "flake8 crawler/ --max-line-length=120"
+    typecheck: ""
+
+  acceptance:
+    - "所有 P0 测试通过"
+    - "代码符合 PEP 8 规范"
+    - "支持完整爬取流程"
+
+  rollback:
+    - "回滚配置文件"
+    - "删除新增模块"
+
+  monitoring:
+    - metric: "爬取成功率"
+    - metric: "错误率"
+    - metric: "去重率"
