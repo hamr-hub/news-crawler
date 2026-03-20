@@ -1,7 +1,7 @@
 BOT_NAME = 'news_crawler'
 
-SPIDER_MODULES = ['crawler.crawler.spiders']
-NEWSPIDER_MODULE = 'crawler.crawler.spiders'
+SPIDER_MODULES = ['crawler.spiders']
+NEWSPIDER_MODULE = 'crawler.spiders'
 
 # Scrapy-Playwright settings
 DOWNLOAD_HANDLERS = {
@@ -24,8 +24,8 @@ REDIS_URL = 'redis://localhost:6379'
 
 # Pipelines
 ITEM_PIPELINES = {
-    'crawler.crawler.pipelines.AIAggregationPipeline': 300,
-    'crawler.crawler.pipelines.JsonWriterPipeline': 400,
+    'crawler.pipelines.AIAggregationPipeline': 300,
+    'crawler.pipelines.JsonWriterPipeline': 400,
 }
 
 # AI Settings (Replace with actual)

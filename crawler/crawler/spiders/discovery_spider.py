@@ -1,6 +1,6 @@
 import scrapy
 import urllib.parse
-from crawler.ai_modules.site_classifier import classify_site
+from ai_modules.site_classifier import classify_site
 import redis
 import json
 

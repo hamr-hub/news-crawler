@@ -1,7 +1,7 @@
 import scrapy
-from crawler.crawler.items import NewsItem
-from crawler.crawler.rules_manager import get_rules
-from crawler.ai_modules.self_healing import heal_rules
+from crawler.items import NewsItem
+from crawler.rules_manager import get_rules
+from ai_modules.self_healing import heal_rules
 import urllib.parse
 import redis
 import json

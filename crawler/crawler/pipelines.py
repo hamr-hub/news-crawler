@@ -1,5 +1,5 @@
 import json
-from crawler.ai_modules.news_aggregator import aggregate_news
+from ai_modules.news_aggregator import aggregate_news
 
 class AIAggregationPipeline:
     def process_item(self, item, spider):
